@@ -26,8 +26,9 @@ pipeline {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials',
                     passwordVariable: 'HUBPASS',
                     usernameVariable: 'HUBLOGIN']]) {
-
-                    sh "echo ${env.HUBLOGIN}"
+                    
+                    docker login -u ${env.HUBLOGIN} -p ${env.HUBPASS}
+                    sh "docker push gpkc/hello_containers:latest"
                 }
             }
         }
