@@ -20,5 +20,16 @@ pipeline {
                 sh "docker build -t gpkc/hello_containers ."
             }
         }
+
+        stage('Push Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com']) {
+                    sh "docker push gpkc/hello_containers"
+                }
+            }
+        }
     }
 }
