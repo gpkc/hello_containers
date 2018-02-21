@@ -35,7 +35,8 @@ pipeline {
                     usernameVariable: 'REGLOGIN']]) {
 
                     sh "docker login -u ${env.REGPASS} -p ${env.REGLOGIN} hellocontainersregistry.azurecr.io"
-                    sh "docker push gpkc/hello_containers:latest"
+                    sh "docker tag gpkc/hello_containers:latest hellocontainersregistry.azurecr.io/${env.REGLOGIN}/hello_containers:latest"
+                    sh "docker push hellocontainersregistry.azurecr.io/${env.REGLOGIN}/hello_containers:latest"
                 }
             }
         }
