@@ -16,12 +16,6 @@ pipeline {
         }
 
         stage('Building Docker Image') {
-            agent {
-                docker {
-                    image 'docker'
-                    args '-u root:root'
-                }
-            }
             steps {
                 sh "docker build -t gpkc/hello_containers ."
             }
