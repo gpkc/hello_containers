@@ -10,6 +10,5 @@ ADD . /app
 ENV HOME /app
 
 EXPOSE 5000
-
 ENV FLASK_APP app.py
 ENTRYPOINT ["python", "-m", "flask", "run", "--host=0.0.0.0"]
