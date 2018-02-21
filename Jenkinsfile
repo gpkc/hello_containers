@@ -30,6 +30,13 @@ pipeline {
                     sh "docker login -u ${env.HUBLOGIN} -p ${env.HUBPASS}"
                     sh "docker push gpkc/hello_containers:latest"
                 }
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'azure-registry',
+                    passwordVariable: 'REGPASS',
+                    usernameVariable: 'REGLOGIN']]) {
+
+                    sh "docker login -u ${env.REGPASS} -p ${env.REGLOGIN} hellocontainersregistry.azurecr.io"
+                    sh "docker push gpkc/hello_containers:latest"
+                }
             }
         }
     }
