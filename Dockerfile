@@ -11,6 +11,5 @@ ENV HOME /app
 
 EXPOSE 5000
 
-ENTRYPOINT [ "python" ]
-
-CMD [ "hello_containers.py" ]
+ENV FLASK_APP app.py
+ENTRYPOINT ["python", "-m", "flask", "run", "--host=0.0.0.0"]
