@@ -23,9 +23,11 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com']) {
-                    sh "docker login"
-                    sh "docker push gpkc/hello_containers:latest"
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub-credentials',
+                    passwordVariable: 'HUBPASS',
+                    usernameVariable: 'HUBLOGIN']]) {
+
+                    sh "echo ${env.HUBLOGIN}"
                 }
             }
         }
