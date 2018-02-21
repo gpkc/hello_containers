@@ -17,14 +17,14 @@ pipeline {
 
         stage('Building Docker Image') {
             steps {
-                sh "docker build -t gpkc/hello_containers ."
+                sh "docker build -t gpkc/hello_containers:latest ."
             }
         }
 
         stage('Push Image') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com']) {
-                    sh "docker push gpkc/hello_containers"
+                    sh "docker push gpkc/hello_containers:latest"
                 }
             }
         }
