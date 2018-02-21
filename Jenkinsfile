@@ -24,6 +24,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com']) {
+                    sh "docker login"
                     sh "docker push gpkc/hello_containers:latest"
                 }
             }
