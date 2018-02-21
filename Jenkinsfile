@@ -1,4 +1,6 @@
 pipeline {
+    agent { label 'docker' }
+
     stages {
         stage('Requirements and Test') {
             agent {
@@ -14,7 +16,6 @@ pipeline {
         }
 
         stage('Building Docker Image') {
-            agent { label 'docker' }
             steps {
                 sh "docker build -t gpkc/hello_containers ."
             }
